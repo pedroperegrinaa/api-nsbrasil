@@ -2,8 +2,11 @@ import { Schema, model, Document } from 'mongoose'
 
 interface User extends Document {
     name: string
-    email: string
-    password: string
+    email: {
+        type: string
+        unique: true
+    }
+    hashPassword: string
 }
 
 const UserSchema = new Schema({
@@ -15,7 +18,7 @@ const UserSchema = new Schema({
     type: String,
     required: true
   },
-  password: {
+  hashPassword: {
     type: String,
     required: true
   }
