@@ -22,7 +22,7 @@ class App {
   }
 
   private database (): void {
-    mongoose.connect(process.env.MONGODB_URL)
+    mongoose.connect(process.env.MONGODB_URL as string)
   }
 
   private routes (): void {
