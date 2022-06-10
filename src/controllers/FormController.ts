@@ -58,7 +58,9 @@ class FormController {
         return res.json(badRequest(new InvalidParamError('Form não encontrado')))
       }
 
-      await Form.findByIdAndUpdate(req.params.id, req.body, { new: true })
+      form = await Form.findByIdAndUpdate(req.params.id, req.body, { new: true })
+
+      return res.json(form)
     } catch (error) {
       return res.json(badRequest(new InvalidParamError(error.message)))
     }
