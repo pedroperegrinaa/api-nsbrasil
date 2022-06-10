@@ -13,6 +13,10 @@ class FormController {
   }
 
   public async store (req: Request, res: Response): Promise<Response> {
+    if (!req.body) {
+      return res.json(badRequest(new InvalidParamError('Body não pode estar vazio')))
+    }
+
     try {
       const form = await Form.create(req.body)
 
@@ -23,21 +27,60 @@ class FormController {
   }
 
   public async show (req: Request, res: Response): Promise<Response> {
-    const form = await Form.findById(req.params.id)
+    if (!req.params.id) {
+      return res.json(badRequest(new InvalidParamError('Id não informado')))
+    }
 
-    return res.json(form)
+    try {
+      let form
+      if (!(form = await Form.findById(req.params.id))) {
+        return res.json(badRequest(new InvalidParamError('Form não encontrado')))
+      }
+
+      return res.json(form)
+    } catch (error) {
+      return res.json(badRequest(new InvalidParamError(error.message)))
+    }
   }
 
   public async update (req: Request, res: Response): Promise<Response> {
-    const form = await Form.findByIdAndUpdate(req.params.id, req.body, { new: true })
+    if (!req.params.id) {
+      return res.json(badRequest(new InvalidParamError('Id não informado')))
+    }
 
-    return res.json(form)
+    if (!req.body) {
+      return res.json(badRequest(new InvalidParamError('Body não pode estar vazio')))
+    }
+
+    try {
+      let form
+      if (!(form = await Form.findById(req.params.id))) {
+        return res.json(badRequest(new InvalidParamError('Form não encontrado')))
+      }
+
+      await Form.findByIdAndUpdate(req.params.id, req.body, { new: true })
+    } catch (error) {
+      return res.json(badRequest(new InvalidParamError(error.message)))
+    }
   }
 
   public async destroy (req: Request, res: Response): Promise<Response> {
-    await Form.findByIdAndDelete(req.params.id)
+    if (!req.params.id) {
+      return res.json(badRequest(new InvalidParamError('Id não informado')))
+    }
 
-    return res.send()
+    try {
+      let form
+      if (!(form = await Form.findById(req.params.id))) {
+        return res.json(badRequest(new InvalidParamError('Form não encontrado')))
+      }
+
+      await Form.findByIdAndDelete(req.params.id)
+
+      return res.send()
+    } catch (error) {
+      return res.json(badRequest(new InvalidParamError(error.message)))
+    }
   }
 }
 
