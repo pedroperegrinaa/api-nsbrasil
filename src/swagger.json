@@ -1,26 +1,23 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "Storeasy API",
-        "description": "API do sistema de pagamentos da Storeasy",
-        "contact": {
-            "email": "pedrosilva1p333@gmail.com"
-        },
+        "title": "NS Brasil",
+        "description": "API do sistema da NS Brasil",
         "version": "1.0.0"
     },
     "servers": [
         {
-            "url": "http://localhost:5000",
+            "url": "http://localhost:3333",
             "description": "test API"
         }
     ],
     "paths": {
-        "/clients": {
+        "/users": {
             "get": {
-                "summary": "Clients",
-                "description": "Lista todos os carrinhos",
+                "summary": "Users",
+                "description": "Lista todos os usuarios",
                 "tags": [
-                    "Clients"
+                    "Users"
                 ],
                 "responses": {
                     "200": {
@@ -32,34 +29,20 @@
                 }
             },
             "post": {
-                "summary": "Clients",
-                "description": "Cria um carrinho no banco de dados (o code não pode ser repetido)",
+                "summary": "Users",
+                "description": "Cria um usuario",
                 "tags": [
-                    "Clients"
+                    "Users"
                 ],
                 "requestBody": {
                     "content": {
                         "application/json": {
                             "schema": {
-                                "ref": "#/components/schemas/Clients",
+                                "ref": "#/components/schemas/User",
                                 "example": {
-                                    "line_1": "375, Av. General Justo, Centro",
-                                    "line_2": "8º andar",
-                                    "zip_code": "20021130",
-                                    "city": "Rio de Janeiro",
-                                    "state": "RJ",
-                                    "country": "BR",
-                                    "birthdate": "05/03/1984",
-                                    "name": "Falcao",
-                                    "email": "falcaocaocao@avengers.com",
-                                    "code": "MY_CUSTOMER_001",
-                                    "document": "93095135274",
-                                    "type": "individual",
-                                    "document_type": "CPF",
-                                    "gender": "male",
-                                    "country_code": "55",
-                                    "area_code": "21",
-                                    "number": "000000000"
+                                    "name": "pedrinho",
+                                    "email": "pedrinho@gmail.com",
+                                    "password": "acordapedrinho"
                                 }
                             }
                         }
@@ -75,63 +58,18 @@
                 }
             }
         },
-        "/carts": {
-            "get": {
-                "summary": "Carts",
-                "description": "Lista todos os carrinhos",
-                "tags": [
-                    "Carts"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Success"
-                    },
-                    "400": {
-                        "description": "error"
-                    }
-                }
-            },
-            "post": {
-                "summary": "Carts",
-                "description": "Cria um carrinho no banco de dados (o code não pode ser repetido)",
-                "tags": [
-                    "Carts"
-                ],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "ref": "#/components/schemas/Cart",
-                                "example": {
-                                    "code": 1,
-                                    "price": 22
-                                }
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Success"
-                    },
-                    "400": {
-                        "description": "error"
-                    }
-                }
-            }
-        },
-        "/carts/{id}": {
+        "/users/{id}": {
             "put": {
-                "summary": "Carts",
-                "description": "Atualiza um carrinho no banco de dados (é necessário passar o _id que você pode coletar no get)",
+                "summary": "Users",
+                "description": "Atualiza um usuario no banco de dados (é necessário passar o _id que você pode coletar no get)",
                 "tags": [
-                    "Carts"
+                    "Users"
                 ],
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "id do carrinho",
+                        "description": "id do usuario",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -142,10 +80,11 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "ref": "#/components/schemas/Cart",
+                                "ref": "#/components/schemas/User",
                                 "example": {
-                                    "code": 1,
-                                    "price": 22
+                                    "name": "jao",
+                                    "email": "jao@gmail.com",
+                                    "password": "jaojaojao"
                                 }
                             }
                         }
@@ -161,16 +100,16 @@
                 }
             },
             "delete": {
-                "summary": "Carts",
-                "description": "Atualiza um carrinho no banco de dados",
+                "summary": "Users",
+                "description": "Deleta um usuario no banco de dados",
                 "tags": [
-                    "Carts"
+                    "Users"
                 ],
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "id do carrinho",
+                        "description": "id do usuario",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -187,12 +126,12 @@
                 }
             }
         },
-        "/creditcard": {
+        "/forms": {
             "get": {
-                "summary": "Carts",
-                "description": "Lista todos os cartões",
+                "summary": "Forms",
+                "description": "Lista todos os formularios",
                 "tags": [
-                    "Credit Card"
+                    "Forms"
                 ],
                 "responses": {
                     "200": {
@@ -204,33 +143,18 @@
                 }
             },
             "post": {
-                "summary": "Carts",
-                "description": "Adiciona um cartão de crédito a um usuario no pagar.me",
+                "summary": "Forms",
+                "description": "Cria um formulario",
                 "tags": [
-                    "Credit Card"
+                    "Forms"
                 ],
                 "requestBody": {
                     "content": {
                         "application/json": {
                             "schema": {
-                                "ref": "#/components/schemas/CreditCard",
+                                "ref": "#/components/schemas/Form",
                                 "example": {
-                                    "line_1": "375, Av. General Osorio, Centro",
-                                    "line_2": "7º Andar",
-                                    "zip_code": "220000111",
-                                    "city": "Rio de Janeiro",
-                                    "state": "RJ",
-                                    "country": "BR",
-                                    "verify_card": true,
-                                    "number": "4000000000000010",
-                                    "holder_name": "Tony Stark",
-                                    "holder_document": "93095135270",
-                                    "exp_month": 1,
-                                    "exp_year": 30,
-                                    "cvv": "351",
-                                    "brand": "Mastercard",
-                                    "label": "renner",
-                                    "customer_id": "cus_dBVZOB7TGHD2YLmv"
+                                    "any": "any"
                                 }
                             }
                         }
@@ -245,147 +169,93 @@
                     }
                 }
             }
-        }
-    },
-    "components": {
-        "schemas": {
-            "Carts": {
-                "type": "object",
-                "properties": {
-                    "code": {
-                        "type": "number"
-                    },
-                    "price": {
-                        "type": "number"
-                    }
-                }
-            },
-            "Clients": {
-                "type": "object",
-                "properties": {
-                    "address": {
-                        "type": "object",
-                        "properties": {
-                            "line_1": {
-                                "type": "stirng"
-                            },
-                            "line_2": {
-                                "type": "string"
-                            },
-                            "zip_code": {
-                                "type": "string"
-                            },
-                            "city": {
-                                "type": "string"
-                            },
-                            "state": {
-                                "type": "string"
-                            },
-                            "country": {
-                                "type": "string"
-                            }
+        },
+        "/forms/{id}": {
+            "put": {
+                "summary": "Forms",
+                "description": "Atualiza um formulario no banco de dados (é necessário passar o _id que você pode coletar no get)",
+                "tags": [
+                    "Forms"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id do formulario",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
                         }
-                    },
-                    "birthdate": {
-                        "type": "string"
-                    },
-                    "name": {
-                        "type": "string"
-                    },
-                    "email": {
-                        "type": "string"
-                    },
-                    "code": {
-                        "type": "number"
-                    },
-                    "document": {
-                        "type": "string"
-                    },
-                    "type": {
-                        "type": "string"
-                    },
-                    "document_type": {
-                        "type": "string"
-                    },
-                    "gender": {
-                        "type": "stirng"
-                    },
-                    "phones": {
-                        "type": "object",
-                        "properties": {
-                            "mobile_phone": {
-                                "type": "object",
-                                "properties": {
-                                    "country_code": {
-                                        "type": "string"
-                                    },
-                                    "area_code": {
-                                        "type": "string"
-                                    },
-                                    "number": {
-                                        "type": "string"
-                                    }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "ref": "#/components/schemas/Form",
+                                "example": {
+                                    "any": "any2"
                                 }
                             }
                         }
                     }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "error"
+                    }
                 }
             },
-            "CreditCard": {
+            "delete": {
+                "summary": "Forms",
+                "description": "Deleta um formulario no banco de dados",
+                "tags": [
+                    "Forms"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id do formulario",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "error"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Form": {
+                "type": "individual"
+            },
+            "User": {
                 "type": "object",
                 "properties": {
-                    "address": {
-                        "type": "object",
-                        "properties": {
-                            "line_1": {
-                                "type": "stirng"
-                            },
-                            "line_2": {
-                                "type": "string"
-                            },
-                            "zip_code": {
-                                "type": "string"
-                            },
-                            "city": {
-                                "type": "string"
-                            },
-                            "state": {
-                                "type": "string"
-                            },
-                            "country": {
-                                "type": "string"
-                            }
-                        }
+                    "name": {
+                        "type": "string",
+                        "required": true
                     },
-                    "verify_card": {
-                        "type": "string"
+                    "email": {
+                        "type": "string",
+                        "required": true
                     },
-                    "number": {
-                        "type": "string"
-                    },
-                    "holder_name": {
-                        "type": "string"
-                    },
-                    "holder_document": {
-                        "type": "number"
-                    },
-                    "exp_month": {
-                        "type": "string"
-                    },
-                    "exp_year": {
-                        "type": "string"
-                    },
-                    "cvv": {
-                        "type": "string"
-                    },
-                    "brand": {
-                        "type": "stirng"
-                    },
-                    "label": {
-                        "type": "stirng"
-                    },
-                    "customer_id": {
-                        "type": "stirng"
+                    "password": {
+                        "type": "string",
+                        "required": true
                     }
                 }
             }
