@@ -5,6 +5,9 @@ import mongoose from 'mongoose'
 
 import routes from './routes'
 
+import SwaggerUi from 'swagger-ui-express'
+import swaggerDocument from './swagger.json'
+
 class App {
   public express: express.Application
 
@@ -19,6 +22,11 @@ class App {
   private middlewares (): void {
     this.express.use(express.json())
     this.express.use(cors())
+    this.express.use(
+      '/doc',
+      SwaggerUi.serve,
+      SwaggerUi.setup(swaggerDocument, { explorer: true })
+    )
   }
 
   private database (): void {

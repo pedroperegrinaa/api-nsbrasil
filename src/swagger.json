@@ -1,0 +1,394 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Storeasy API",
+        "description": "API do sistema de pagamentos da Storeasy",
+        "contact": {
+            "email": "pedrosilva1p333@gmail.com"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:5000",
+            "description": "test API"
+        }
+    ],
+    "paths": {
+        "/clients": {
+            "get": {
+                "summary": "Clients",
+                "description": "Lista todos os carrinhos",
+                "tags": [
+                    "Clients"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "error"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Clients",
+                "description": "Cria um carrinho no banco de dados (o code não pode ser repetido)",
+                "tags": [
+                    "Clients"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "ref": "#/components/schemas/Clients",
+                                "example": {
+                                    "line_1": "375, Av. General Justo, Centro",
+                                    "line_2": "8º andar",
+                                    "zip_code": "20021130",
+                                    "city": "Rio de Janeiro",
+                                    "state": "RJ",
+                                    "country": "BR",
+                                    "birthdate": "05/03/1984",
+                                    "name": "Falcao",
+                                    "email": "falcaocaocao@avengers.com",
+                                    "code": "MY_CUSTOMER_001",
+                                    "document": "93095135274",
+                                    "type": "individual",
+                                    "document_type": "CPF",
+                                    "gender": "male",
+                                    "country_code": "55",
+                                    "area_code": "21",
+                                    "number": "000000000"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "error"
+                    }
+                }
+            }
+        },
+        "/carts": {
+            "get": {
+                "summary": "Carts",
+                "description": "Lista todos os carrinhos",
+                "tags": [
+                    "Carts"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "error"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Carts",
+                "description": "Cria um carrinho no banco de dados (o code não pode ser repetido)",
+                "tags": [
+                    "Carts"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "ref": "#/components/schemas/Cart",
+                                "example": {
+                                    "code": 1,
+                                    "price": 22
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "error"
+                    }
+                }
+            }
+        },
+        "/carts/{id}": {
+            "put": {
+                "summary": "Carts",
+                "description": "Atualiza um carrinho no banco de dados (é necessário passar o _id que você pode coletar no get)",
+                "tags": [
+                    "Carts"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id do carrinho",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "ref": "#/components/schemas/Cart",
+                                "example": {
+                                    "code": 1,
+                                    "price": 22
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "error"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Carts",
+                "description": "Atualiza um carrinho no banco de dados",
+                "tags": [
+                    "Carts"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id do carrinho",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "error"
+                    }
+                }
+            }
+        },
+        "/creditcard": {
+            "get": {
+                "summary": "Carts",
+                "description": "Lista todos os cartões",
+                "tags": [
+                    "Credit Card"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "error"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Carts",
+                "description": "Adiciona um cartão de crédito a um usuario no pagar.me",
+                "tags": [
+                    "Credit Card"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "ref": "#/components/schemas/CreditCard",
+                                "example": {
+                                    "line_1": "375, Av. General Osorio, Centro",
+                                    "line_2": "7º Andar",
+                                    "zip_code": "220000111",
+                                    "city": "Rio de Janeiro",
+                                    "state": "RJ",
+                                    "country": "BR",
+                                    "verify_card": true,
+                                    "number": "4000000000000010",
+                                    "holder_name": "Tony Stark",
+                                    "holder_document": "93095135270",
+                                    "exp_month": 1,
+                                    "exp_year": 30,
+                                    "cvv": "351",
+                                    "brand": "Mastercard",
+                                    "label": "renner",
+                                    "customer_id": "cus_dBVZOB7TGHD2YLmv"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "error"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Carts": {
+                "type": "object",
+                "properties": {
+                    "code": {
+                        "type": "number"
+                    },
+                    "price": {
+                        "type": "number"
+                    }
+                }
+            },
+            "Clients": {
+                "type": "object",
+                "properties": {
+                    "address": {
+                        "type": "object",
+                        "properties": {
+                            "line_1": {
+                                "type": "stirng"
+                            },
+                            "line_2": {
+                                "type": "string"
+                            },
+                            "zip_code": {
+                                "type": "string"
+                            },
+                            "city": {
+                                "type": "string"
+                            },
+                            "state": {
+                                "type": "string"
+                            },
+                            "country": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "birthdate": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "code": {
+                        "type": "number"
+                    },
+                    "document": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "string"
+                    },
+                    "document_type": {
+                        "type": "string"
+                    },
+                    "gender": {
+                        "type": "stirng"
+                    },
+                    "phones": {
+                        "type": "object",
+                        "properties": {
+                            "mobile_phone": {
+                                "type": "object",
+                                "properties": {
+                                    "country_code": {
+                                        "type": "string"
+                                    },
+                                    "area_code": {
+                                        "type": "string"
+                                    },
+                                    "number": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "CreditCard": {
+                "type": "object",
+                "properties": {
+                    "address": {
+                        "type": "object",
+                        "properties": {
+                            "line_1": {
+                                "type": "stirng"
+                            },
+                            "line_2": {
+                                "type": "string"
+                            },
+                            "zip_code": {
+                                "type": "string"
+                            },
+                            "city": {
+                                "type": "string"
+                            },
+                            "state": {
+                                "type": "string"
+                            },
+                            "country": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "verify_card": {
+                        "type": "string"
+                    },
+                    "number": {
+                        "type": "string"
+                    },
+                    "holder_name": {
+                        "type": "string"
+                    },
+                    "holder_document": {
+                        "type": "number"
+                    },
+                    "exp_month": {
+                        "type": "string"
+                    },
+                    "exp_year": {
+                        "type": "string"
+                    },
+                    "cvv": {
+                        "type": "string"
+                    },
+                    "brand": {
+                        "type": "stirng"
+                    },
+                    "label": {
+                        "type": "stirng"
+                    },
+                    "customer_id": {
+                        "type": "stirng"
+                    }
+                }
+            }
+        }
+    }
+}
